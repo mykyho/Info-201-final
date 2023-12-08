@@ -1,63 +1,14 @@
 # Info-201-final
-ui <- fluidPage(
-  titlePanel("Mario Kart Analysis"),
-  sidebarLayout(
-    sidebarPanel(
-      h2("Control Panel"),
-      selectInput(
-        inputId = "char_name",
-        label = "Select a character",
-        #choices = list("Mario", "Luigi", "Browser")
-        choices = char_df$Character
-      )
-    ),
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Plot", plotOutput(outputId = "radar")),
-        tabPabel("Table", tableOutput(outputId = "table"))
-      )
-    )
-  ),
-    tableOutput(outputId = "table"),
-    plotOutput(outputId = "radar")
-      
-    ),
-    
-    h1("THIS IS NOT IN THE SIDEBAR LAYOUT"),
-    p("IDKDIDIIDIDIDKIDK")
-  )
+ui <- fluidPage (
+  titlePanel("About this project"),
+  p("The advice that many of us have heard is along the lines of, “Life is never a smooth journey, there will always be hurdles along the way.” As we agree with this statement, we also know that some people have more hurdles than others.
+  Imagine a world where every young person, regardless of their circumstances, has easy access to resources and support. Our project aims to bring this vision to life by bridging the gap between digital resources and the youth and young adults    in need of assistance such as shelter, food and others. "),
+  br(),
+  titlePanel("Page Describtion"),
+  p("here is page description"),
 )
+server <- function(input, output){
+  
+}
 
-server <- function(input, output) {
-  #output$testing <- renderText({
-    #return(input$char_name)
-  #})
-  
-  make_radar_table <- function(name) {
-    data_pt <- filter(char_df, Character == input$char_name)
-    data_pt <- select(data_pt, -c(Character, Class))
-    
-    max_pt <- summarise_all(char_df, max)
-    max_pt <- select(max_pt, -c(Character, Class))
-    
-    min_pt <- summarise_all(char_df, min)
-    min_pt <- select(min_pt, -c(Character, Class))
-    
-    do.call("rbind", list(max_pt, min_pt, data_pt))
-  }
-  
-   output$table <- renderTable ({
-  # return(char_df)
-  # get the row corresponding to "Mario"
-    
-    return(make_radar_table(input$char_name))
-    
-   # return(max_pt)
-    output$radar <- renderPlot({
-      tb <- make_radar_tb(input$char_df)
-      radarchart(tb)
-    })
-  
-  })
-
-  shinyApp(ui = ui, server = server)
+shinyApp(ui = ui, server = server)
