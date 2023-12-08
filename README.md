@@ -6,6 +6,11 @@ ui <- fluidPage (
   br(),
   titlePanel("Page Describtion"),
   p("here is page description"),
+  tags$style(HTML("
+      h2 {
+            background-color: Teal;
+            color: White;
+      }")),
 )
 server <- function(input, output){
   
