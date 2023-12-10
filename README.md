@@ -38,6 +38,33 @@ ui <- navbarPage(
                         #p("We uncovered that developed countries with higher spending amounts have a larger average alcohol consumption as well as lower life expectancies than developing countries. To visualize these trends, please go through                             each webpage for interactive displays of this data!"),
                         #p(a(href = "https://www.who.int/health-topics/alcohol#tab=tab_1", "Learn more about alcohol consumption on the WHO Alcohol Webpage", target = "_blank"))
                     )
+            
+             interactive_page_three <- tabPanel(
+  "Poverty",
+  titlePanel('Comparing Poverty Youth Rate Percentages of Various States'),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        inputId = "State",
+        label = "Choose State to Display",
+        choices = list("High" = "High", 
+                       "Medium" = "Medium",
+                       "Low" = "Low",
+                       "All" = "All")
+      ), 
+    ),
+    mainPanel(
+      plotlyOutput("Poverty"),
+      h2("Description"),
+      p("This chart attempts to show the data in which crime rates are represented 
+      throughout different states in the United States. The box plots 
+      presents the spread of the data (percentage of poverty) across each 
+      of the 3 categories: high, low, and medium. The ability to select which category 
+      to display with the widget adds for further focus.")
+    ) 
+  )
+)
+             
              )
            ),
   
